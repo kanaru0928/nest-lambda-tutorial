@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  serverless-nestjs-tutorial
+
+  Sample SAM Template for serverless-nestjs-tutorial
+  
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+  NestjsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      MemorySize: 1024
+      PackageType: Image
+      Events:
+        RootEvent:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: get
+        AboutEvent:
+          Type: HttpApi
+          Properties:
+            Path: /about
+            Method: get
+    Metadata:
+      DockerTag: v1
+      DockerContext: ./app
+      Dockerfile: Dockerfile
+      DockerTarget: runner
+      
+Outputs:
+  NestjsFunctionURL:
+    Description: "API Gateway endpoint URL for Nestjs"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/"
