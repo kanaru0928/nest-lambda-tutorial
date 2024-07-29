@@ -16,13 +16,13 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+      expect(appController.getHello()).toEqual({ message: 'Hello World!' });
     });
   });
 
   describe('about', () => {
     it('should return "About page"', () => {
-      expect(appController.getAbout()).toBe('About page');
+      expect(appController.getAbout()).toEqual({ message: 'About page' });
     });
   });
 });
